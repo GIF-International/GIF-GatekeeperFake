@@ -6,4 +6,5 @@ public interface ISessionsManagerGrpcService
 {
     StartEngagementResponse StartEngagement(StartEngagementRequest request);
     StartSessionResponse StartSession(StartSessionRequest request);
+    GetSessionDetailsResponse GetSessionDetails(GetSessionDetailsRequest request);
 }

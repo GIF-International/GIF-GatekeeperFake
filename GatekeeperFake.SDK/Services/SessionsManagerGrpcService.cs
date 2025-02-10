@@ -40,4 +40,18 @@ public class SessionsManagerGrpcService : ISessionsManagerGrpcService
             throw;
         }
     }
+
+    public GetSessionDetailsResponse GetSessionDetails(GetSessionDetailsRequest request)
+    {
+        try
+        {
+            var result = _client.GetSessionDetails(request);
+
+            return result;
+        }
+        catch (RpcException ex)
+        {
+            throw;
+        }
+    }
 }

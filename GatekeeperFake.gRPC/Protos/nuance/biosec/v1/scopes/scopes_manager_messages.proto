@@ -1,0 +1,402 @@
+/*-
+ * #%L
+ * gatekeeper-api-protoc
+ * %%
+ * Copyright (C) 2021 - 2026 Nuance Communications Inc. All Rights Reserved.
+ * %%
+ * The copyright to the computer program(s) herein is the property of
+ * Nuance Communications Inc. The program(s) may be used and/or copied
+ * only with the written permission from Nuance Communications Inc.
+ * or in accordance with the terms and conditions stipulated in the
+ * agreement/contract under which the program(s) have been supplied.
+ * #L%
+ */
+
+syntax = "proto3";
+
+package nuance.biosec.v1.scopes;
+
+option java_package = "com.nuance.rpc.biosec.v1.scopes";
+option java_multiple_files = true;
+
+import "nuance/biosec/v1/scopes/scopes_manager_enums.proto";
+//import "nuance/biosec/v1/resources/resources_manager_enums.proto";
+import "nuance/biosec/v1/common_types.proto";
+import "nuance/rpc/status.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+// Input message that defines parameters for [CreateScope](#CreateScope).
+message CreateScopeRequest {
+  // Mandatory. The scope identifier provided by the scope creator.
+  string scope_id = 1;
+  // Optional. Additional information about the scope.
+  ScopeDetailsForCreate details = 2;
+  // Optional. A field mask used to specify the [ScopeDetailsForCreate](#nuance.biosec.v1.scopes.ScopeDetailsForCreate) fields that the method sets.
+  google.protobuf.FieldMask field_mask = 3;
+  // Mandatory. Scope profile.
+  ScopeProfile scope_profile = 4;
+  // Mandatory. Expected number of persons in the scope.
+  int32 expected_persons_number = 5;
+}
+
+// Output message that defines parameters returned by [CreateScope](#CreateScope).
+message CreateScopeResponse {
+  // Mandatory. General operation status.
+  nuance.rpc.Status status = 1;
+  // Optional. Unique ID of the newly created scope.
+  nuance.biosec.v1.UniqueId gk_scope_id = 2;
+}
+
+// Input message that defines parameters for [RenameScope](#RenameScope).
+//
+// Uses the context field as follows:
+//
+// * gk_engagement_id: Not used
+// * gk_session_id: Not used
+// * gk_scope_id: Optional
+// * configset_id: Not used
+message RenameScopeRequest {
+  // Optional. General request context.
+  nuance.biosec.v1.Context context = 1;
+  // Mandatory. Scope's unique ID.
+  nuance.biosec.v1.UniqueId gk_scope_id = 2;
+  // Mandatory. Scope's new ID. It must be unique.
+  string new_scope_id = 3;
+}
+
+// Output message that defines parameters returned by [RenameScope](#RenameScope).
+message RenameScopeResponse {
+  // Mandatory. General operation status.
+  nuance.rpc.Status status = 1;
+}
+
+// Input message that defines parameters for [GetScopeDetails](#GetScopeDetails).
+//
+// Uses the context field as follows:
+//
+// * gk_engagement_id: Not used
+// * gk_session_id: Not used
+// * gk_scope_id: Optional
+// * configset_id: Not used
+message GetScopeDetailsRequest {
+  // Optional. General request context.
+  nuance.biosec.v1.Context context = 1;
+  // Mandatory. Scope's unique ID.
+  nuance.biosec.v1.UniqueId gk_scope_id = 2;
+  // Optional. A field mask used to specify the [ScopeDetailsForRead](#nuance.biosec.v1.scopes.ScopeDetailsForRead) fields that the method reads.
+  google.protobuf.FieldMask field_mask = 3;
+}
+
+// Output message that defines parameters returned by [GetScopeDetails](#GetScopeDetails).
+message GetScopeDetailsResponse {
+  // Mandatory. General operation status.
+  nuance.rpc.Status status = 1;
+  // Optional. Scope's details.
+  ScopeDetailsForRead details = 2;
+}
+
+// Input message that defines parameters for [ListScopes](#ListScopes).
+//
+// Uses the context field as follows:
+//
+// * gk_engagement_id: Not used
+// * gk_session_id: Not used
+// * gk_scope_id: Not used
+// * configset_id: Not used
+message ListScopesRequest {
+  // Optional. General request context.
+  nuance.biosec.v1.Context context = 1;
+  // Optional. A field mask used to specify the [ScopeDetailsForRead](#nuance.biosec.v1.scopes.ScopeDetailsForRead) that the method reads.
+  google.protobuf.FieldMask field_mask = 2;
+}
+
+// Output message that defines parameters returned by [ListScopes](#ListScopes).
+message ListScopesResponse {
+  // Mandatory. General operation status.
+  nuance.rpc.Status status = 1;
+  // Optional. List of scopes details.
+  repeated ScopeDetailsForRead details = 2;
+}
+
+// Input message that defines parameters for [GetGkScopeId](#GetGkScopeId).
+//
+// Uses the context field as follows:
+//
+// * gk_engagement_id: Not used
+// * gk_session_id: Not used
+// * gk_scope_id: Optional
+// * configset_id: Not used
+message GetGkScopeIdRequest {
+  // Optional. General request context.
+  nuance.biosec.v1.Context context = 1;
+  // Mandatory. Identifies the scope.
+  string scope_id = 2;
+}
+
+// Output message that defines parameters returned by [GetGkScopeId](#GetGkScopeId).
+message GetGkScopeIdResponse {
+  // Mandatory. General operation status.
+  nuance.rpc.Status status = 1;
+  // Optional. Scopes's unique ID.
+  nuance.biosec.v1.UniqueId gk_scope_id = 2;
+}
+
+// Input message that defines parameters for [SetScopeResource](#SetScopeResource).
+//
+// Uses the context field as follows:
+//
+// * gk_engagement_id: Not used
+// * gk_session_id: Not used
+// * gk_scope_id: Optional
+// * configset_id: Not used
+message SetScopeResourceRequest {
+  // Optional. General request context.
+  nuance.biosec.v1.Context context = 1;
+  // Mandatory. Scopes's unique ID.
+  nuance.biosec.v1.UniqueId gk_scope_id = 2;
+  // Mandatory. Resource's name.
+  string resource_name = 3;
+  // Mandatory. Resource's parameters.
+  map<string, string> resource_parameters = 4;
+  // Mandatory. Secured resource parameters. [GetScopeResource](#GetScopeResource) does not return these parameters.
+  map<string, string> secured_resource_parameters = 5;
+}
+
+// Output message that defines parameters returned by [SetScopeResource](#SetScopeResource).
+message SetScopeResourceResponse {
+  // Mandatory. General operation status.
+  nuance.rpc.Status status = 1;
+}
+
+// Input message that defines parameters for [UpdateASRaaSCredentials](#UpdateASRaaSCredentials).
+//
+// Uses the context field as follows:
+//
+// * gk_engagement_id: Not used
+// * gk_session_id: Not used
+// * gk_scope_id: Optional
+// * configset_id: Not used
+message UpdateASRaaSCredentialsRequest {
+  // Optional. General request context.
+  nuance.biosec.v1.Context context = 1;
+  // Mandatory. Scopes's unique ID.
+  nuance.biosec.v1.UniqueId gk_scope_id = 2;
+  // Mandatory. ASRaaS client Id.
+  string client_id = 3;
+  // Mandatory. ASRaaS client secret.
+  string client_secret = 4;
+}
+
+// Output message that defines parameters returned by [UpdateASRaaSCredentials](#UpdateASRaaSCredentials).
+message UpdateASRaaSCredentialsResponse {
+  // Mandatory. General operation status.
+  nuance.rpc.Status status = 1;
+}
+
+
+// Input message that defines parameters for [GetScopeResource](#GetScopeResource).
+//
+// Uses the context field as follows:
+//
+// * gk_engagement_id: Not used
+// * gk_session_id: Not used
+// * gk_scope_id: Optional
+// * configset_id: Not used
+message GetScopeResourceRequest {
+  // Optional. General request context.
+  nuance.biosec.v1.Context context = 1;
+  // Mandatory. Scopes's unique ID.
+  nuance.biosec.v1.UniqueId gk_scope_id = 2;
+  // Mandatory. Resource's name.
+  // The following resource names are supported:
+  //
+  // * cassandra
+  // * minio
+  // * kibana
+  // * encryption
+  // * signing
+  // * media_manager
+  // * asraas
+  string resource_name = 3;
+}
+
+// Output message that defines parameters returned by [SetScopeResource](#SetScopeResource).
+message GetScopeResourceResponse {
+  // Mandatory. General operation status.
+  nuance.rpc.Status status = 1;
+  // Optional. List of the resource's parameters.
+  map<string, string> resource_parameters = 2;
+}
+
+
+// Input message that defines parameters for [UpdateScopeDetails](#UpdateScopeDetails).
+//
+// Uses the context field as follows:
+//
+// * gk_engagement_id: Not used
+// * gk_session_id: Not used
+// * gk_scope_id: Optional
+// * configset_id: Not used
+message UpdateScopeDetailsRequest {
+  // Optional. General request context.
+  nuance.biosec.v1.Context context = 1;
+  // Mandatory. Scope's unique ID.
+  nuance.biosec.v1.UniqueId gk_scope_id = 2;
+  // Mandatory. Details that the method updates.
+  ScopeDetailsForUpdate details = 3;
+  // Mandatory. A field mask used to specify the [ScopeDetailsForUpdate](#nuance.biosec.v1.scopes.ScopeDetailsForUpdate) fields that the method sets.
+  google.protobuf.FieldMask field_mask = 4;
+}
+
+// Output message that defines parameters returned by [UpdateScopeDetails](#UpdateScopeDetails).
+message UpdateScopeDetailsResponse {
+  // Mandatory. General operation status.
+  nuance.rpc.Status status = 1;
+}
+
+// Input message that defines parameters for [SetScopeState](#SetScopeState).
+//
+// Uses the context field as follows:
+//
+// * gk_engagement_id: Not used
+// * gk_session_id: Not used
+// * gk_scope_id: Optional
+// * configset_id: Not used
+message SetScopeStateRequest {
+  // Optional. General request context.
+  nuance.biosec.v1.Context context = 1;
+  // Mandatory. Scope's unique ID.
+  nuance.biosec.v1.UniqueId gk_scope_id = 2;
+  // Mandatory. The scope's state.
+  ScopeState scope_state = 3;
+}
+
+// Output message that defines parameters returned by [SetScopeState](#SetScopeState).
+message SetScopeStateResponse {
+  // Mandatory. General operation status.
+  nuance.rpc.Status status = 1;
+}
+
+// Input message that defines parameters for [MarkScopeForDeletion](#MarkScopeForDeletion).
+//
+// Uses the context field as follows:
+//
+// * gk_engagement_id: Not used
+// * gk_session_id: Not used
+// * gk_scope_id: Optional
+// * configset_id: Not used
+message MarkScopeForDeletionRequest {
+  // Optional. General request context.
+  nuance.biosec.v1.Context context = 1;
+  // Mandatory. Scope's unique ID.
+  nuance.biosec.v1.UniqueId gk_scope_id = 2;
+}
+
+// Output message that defines parameters returned by [MarkScopeForDeletion](#MarkScopeForDeletion).
+message MarkScopeForDeletionResponse {
+  // Mandatory. General operation status.
+  nuance.rpc.Status status = 1;
+}
+
+// Input message that defines parameters for [UnMarkScopeForDeletion](#UnMarkScopeForDeletion).
+//
+// Uses the context field as follows:
+//
+// * gk_engagement_id: Not used
+// * gk_session_id: Not used
+// * gk_scope_id: Optional
+// * configset_id: Not used
+message UnMarkScopeForDeletionRequest {
+  // Optional. General request context.
+  nuance.biosec.v1.Context context = 1;
+  // Mandatory. Scope's unique ID.
+  nuance.biosec.v1.UniqueId gk_scope_id = 2;
+}
+
+// Output message that defines parameters returned by [MarkScopeForDeletion](#MarkScopeForDeletion).
+message UnMarkScopeForDeletionResponse {
+  // Mandatory. General operation status.
+  nuance.rpc.Status status = 1;
+}
+
+// Input message that defines parameters for [ResetScope](#ResetScope).
+//
+// Uses the context field as follows:
+//
+// * gk_engagement_id: Not used
+// * gk_session_id: Not used
+// * gk_scope_id: Optional
+// * configset_id: Not used
+message ResetScopeRequest {
+  // Optional. General request context.
+  nuance.biosec.v1.Context context = 1;
+  // Mandatory. Scope's unique ID.
+  nuance.biosec.v1.UniqueId gk_scope_id = 2;
+}
+
+// Output message that defines parameters returned by [ResetScope](#ResetScope).
+message ResetScopeResponse {
+  // Mandatory. General operation status.
+  nuance.rpc.Status status = 1;
+}
+
+// Contains the readable fields of the Scope. Included in [ListScopesResponse](#nuance.biosec.v1.scopes.ListScopesResponse) and [GetScopeDetailsResponse](#nuance.biosec.v1.scopes.GetScopeDetailsResponse).
+message ScopeDetailsForRead {
+  // Optional. Scope's unique ID.
+  nuance.biosec.v1.UniqueId gk_scope_id = 1;
+  // Optional. Scope's identifier. Must be unique at least at the scope level.
+  string scope_id = 2;
+  // Optional. Name of the customer owning the scope.
+  string customer_name = 3;
+  // Optional. Description of the purpose of the scope.
+  string description = 4;
+  // Optional. Determines if the activity on this scope is billable.
+  bool is_billable = 5;
+  // Optional. The scope's state.
+  ScopeState scope_state = 6;
+  // Optional. The scope's go-live time. This information is used for billing.
+  google.protobuf.Timestamp go_live_timestamp = 7;
+  // Optional. The scope profile.
+  ScopeProfile scope_profile = 8;
+  // Optional. The scope's type.
+  ScopeType scope_type = 9;
+  // Optional. Expected number of persons in the scope.
+  google.protobuf.Int32Value expected_persons_number = 10;
+
+  // Optional. Date and time of the scope creation.
+  google.protobuf.Timestamp creation_timestamp = 997;
+  // Optional. Date and time of the scope last update.
+  google.protobuf.Timestamp modification_timestamp = 998;
+}
+
+// Contains fields that the system uses to create a scope. Included in [CreateScopeRequest](#nuance.biosec.v1.scopes.CreateScopeRequest).
+message ScopeDetailsForCreate {
+  // Optional. Name of the customer owning the scope.
+  string customer_name = 1;
+  // Optional. Description of the purpose of the scope.
+  string description = 2;
+  // Optional. Determines if the activity on this scope is billable.
+  bool is_billable = 3;
+  // Optional. The scope's go-live time. This information is used for billing.
+  google.protobuf.Timestamp go_live_timestamp = 4;
+  // Optional. The scope's type.
+  ScopeType scope_type = 5;
+}
+
+// Contains the writable fields of the Processed Audio Segment. Included in [UpdateScopeDetailsRequest](#nuance.biosec.v1.scopes.UpdateScopeDetailsRequest).
+message ScopeDetailsForUpdate {
+  // Optional. Name of the customer owning the scope.
+  string customer_name = 1;
+  // Optional. Description of the purpose of the scope.
+  string description = 2;
+  // Optional. Determines if the activity on this scope is billable.
+  bool is_billable = 3;
+  // Optional. The scope's go-live time. This information is used for billing.
+  google.protobuf.Timestamp go_live_timestamp = 4;
+  // Optional. The scope's type.
+  ScopeType scope_type = 5;
+  // Optional. Expected number of persons in the scope. NOTE: The updated number will affect only future usages.
+  google.protobuf.Int32Value expected_persons_number = 6;
+}

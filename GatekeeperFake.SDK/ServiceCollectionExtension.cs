@@ -4,6 +4,7 @@ using GatekeeperFake.SDK.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Nuance.Biosec.V1.Entities;
 using Nuance.Biosec.V1.Sessions;
+using Nuance.Biosec.V1.Voiceprint;
 
 namespace GatekeeperFake.SDK;
 
@@ -26,8 +27,14 @@ public static class ServiceCollectionExtension
             client.Address = new Uri("https://localhost:7238");
         });
 
+        services.AddGrpcClient<VoiceprintsManager.VoiceprintsManagerClient>(client =>
+        {
+            client.Address = new Uri("https://localhost:7238");
+        });
+
         services.AddScoped<IGreeterGrpcService, GreeterGrpcService>();
         services.AddScoped<ISessionsManagerGrpcService, SessionsManagerGrpcService>();
         services.AddScoped<IEntitiesManagerGrpcService, EntitiesManagerGrpcService>();
+        services.AddScoped<IVoiceprintsManagerGrpcService, VoiceprintsManagerGrpcService>();
     }
 }

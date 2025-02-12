@@ -26,4 +26,18 @@ public class EntitiesManagerGrpcService : IEntitiesManagerGrpcService
             throw;
         }
     }
+
+    public DeletePersonResponse DeletePerson(DeletePersonRequest request)
+    {
+        try
+        {
+            var result = _client.DeletePerson(request);
+
+            return result;
+        }
+        catch (RpcException ex)
+        {
+            throw;
+        }
+    }
 }

@@ -35,4 +35,22 @@ public class EntitiesManagerService : EntitiesManagerBase
 
         return task;
     }
+
+    public override global::System.Threading.Tasks.Task<global::Nuance.Biosec.V1.Entities.DeletePersonResponse> DeletePerson(global::Nuance.Biosec.V1.Entities.DeletePersonRequest request, grpc::ServerCallContext context)
+    {
+        //throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+
+        var task = Task.FromResult(new DeletePersonResponse
+        {
+            Status = new Nuance.Rpc.Status { StatusCode = Nuance.Rpc.StatusCode.Ok },
+        });
+
+        var minDelay = _configuration.GetValue<int>("Methods:EntitiesManager:DeletePerson:Delay:Min");
+        var maxDelay = _configuration.GetValue<int>("Methods:EntitiesManager:DeletePerson:Delay:Max");
+        var randomDelay = new Random().Next(minDelay, maxDelay);
+
+        Thread.Sleep(randomDelay);
+
+        return task;
+    }
 }

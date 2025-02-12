@@ -16,4 +16,12 @@ public class EntitiesManagerController : ControllerBase
 
         return Ok(new { statusCode = HttpStatusCode.OK, message = result });
     }
+
+    [HttpGet("DeletePerson")]
+    public IActionResult DeletePerson([FromServices] IEntitiesManagerGrpcService entitiesManagerGrpcService)
+    {
+        var result = entitiesManagerGrpcService.DeletePerson(new DeletePersonRequest());
+
+        return Ok(new { statusCode = HttpStatusCode.OK, message = result });
+    }
 }

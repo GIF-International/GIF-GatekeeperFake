@@ -5,4 +5,5 @@ namespace GatekeeperFake.SDK.Interfaces;
 public interface IEntitiesManagerGrpcService
 {
     GetGkPersonIdResponse GetGkPersonId(GetGkPersonIdRequest request);
+    DeletePersonResponse DeletePerson(DeletePersonRequest request);
 }

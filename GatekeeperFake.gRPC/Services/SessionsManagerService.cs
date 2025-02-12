@@ -110,4 +110,22 @@ public class SessionsManagerService : SessionsManagerBase
 
         return task;
     }
+
+    public override global::System.Threading.Tasks.Task<global::Nuance.Biosec.V1.Sessions.StopSessionResponse> StopSession(global::Nuance.Biosec.V1.Sessions.StopSessionRequest request, grpc::ServerCallContext context)
+    {
+        //throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+
+        var task = Task.FromResult(new StopSessionResponse()
+        {
+            Status = new Nuance.Rpc.Status { StatusCode = Nuance.Rpc.StatusCode.Ok },
+        });
+
+        var minDelay = _configuration.GetValue<int>("Methods:SessionsManager:StopSession:Delay:Min");
+        var maxDelay = _configuration.GetValue<int>("Methods:SessionsManager:StopSession:Delay:Max");
+        var randomDelay = new Random().Next(minDelay, maxDelay);
+
+        Thread.Sleep(randomDelay);
+
+        return task;
+    }
 }

@@ -82,4 +82,18 @@ public class SessionsManagerGrpcService : ISessionsManagerGrpcService
             throw;
         }
     }
+
+    public StopSessionResponse StopSession(StopSessionRequest request)
+    {
+        try
+        {
+            var result = _client.StopSession(request);
+
+            return result;
+        }
+        catch (RpcException ex)
+        {
+            throw;
+        }
+    }
 }

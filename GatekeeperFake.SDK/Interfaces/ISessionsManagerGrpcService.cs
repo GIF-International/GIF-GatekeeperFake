@@ -9,4 +9,5 @@ public interface ISessionsManagerGrpcService
     GetSessionDetailsResponse GetSessionDetails(GetSessionDetailsRequest request);
     UpdateSessionResponse UpdateSession(UpdateSessionRequest request);
     GetSessionDecisionResponse GetSessionDecision(GetSessionDecisionRequest request);
+    StopSessionResponse StopSession(StopSessionRequest request);
 }

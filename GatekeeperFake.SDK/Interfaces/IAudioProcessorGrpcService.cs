@@ -5,4 +5,5 @@ namespace GatekeeperFake.SDK.Interfaces;
 public interface IAudioProcessorGrpcService
 {
     ValidateTextResponse ValidateText(ValidateTextRequest request);
+    DetectAudioSpoofingResponse DetectAudioSpoofing(DetectAudioSpoofingRequest request);
 }

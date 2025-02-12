@@ -35,4 +35,27 @@ public class AudioProcessorService : AudioProcessorBase
 
         return task;
     }
+
+    public override global::System.Threading.Tasks.Task<global::Nuance.Biosec.V1.Audio.DetectAudioSpoofingResponse> DetectAudioSpoofing(global::Nuance.Biosec.V1.Audio.DetectAudioSpoofingRequest request, grpc::ServerCallContext context)
+    {
+        //throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+
+        var task = Task.FromResult(new DetectAudioSpoofingResponse
+        {
+            AudioDetails = null,
+            ChannelPlaybackDetectionResult = null,
+            FootprintPlaybackDetectionResult = null,
+            SyntheticSpeechDetectionResult = null,
+            Validity = Nuance.Biosec.V1.AudioValidity.ReasonAudioOk,
+            Status = new Nuance.Rpc.Status { StatusCode = Nuance.Rpc.StatusCode.Ok },
+        });
+
+        var minDelay = _configuration.GetValue<int>("Methods:AudioProcessor:DetectAudioSpoofing:Delay:Min");
+        var maxDelay = _configuration.GetValue<int>("Methods:AudioProcessor:DetectAudioSpoofing:Delay:Max");
+        var randomDelay = new Random().Next(minDelay, maxDelay);
+
+        Thread.Sleep(randomDelay);
+
+        return task;
+    }
 }

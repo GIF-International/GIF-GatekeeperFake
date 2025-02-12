@@ -16,4 +16,12 @@ public class AudioProcessorController : ControllerBase
 
         return Ok(new { statusCode = HttpStatusCode.OK, message = result });
     }
+
+    [HttpGet("DetectAudioSpoofing")]
+    public IActionResult DetectAudioSpoofing([FromServices] IAudioProcessorGrpcService audioProcessorGrpcService)
+    {
+        var result = audioProcessorGrpcService.DetectAudioSpoofing(new DetectAudioSpoofingRequest());
+
+        return Ok(new { statusCode = HttpStatusCode.OK, message = result });
+    }
 }

@@ -26,4 +26,18 @@ public class AudioProcessorGrpcService : IAudioProcessorGrpcService
             throw;
         }
     }
+
+    public DetectAudioSpoofingResponse DetectAudioSpoofing(DetectAudioSpoofingRequest request)
+    {
+        try
+        {
+            var result = _client.DetectAudioSpoofing(request);
+
+            return result;
+        }
+        catch (RpcException ex)
+        {
+            throw;
+        }
+    }
 }

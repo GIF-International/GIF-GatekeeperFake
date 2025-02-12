@@ -54,4 +54,18 @@ public class VoiceprintsProcessorGrpcService : IVoiceprintsProcessorGrpcService
             throw;
         }
     }
+
+    public TrainResponse Train(TrainRequest request)
+    {
+        try
+        {
+            var result = _client.Train(request);
+
+            return result;
+        }
+        catch (RpcException ex)
+        {
+            throw;
+        }
+    }
 }

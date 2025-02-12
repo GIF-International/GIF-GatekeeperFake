@@ -32,4 +32,12 @@ public class VoiceprintsProcessorController : ControllerBase
 
         return Ok(new { statusCode = HttpStatusCode.OK, message = result });
     }
+
+    [HttpGet("Train")]
+    public IActionResult Train([FromServices] IVoiceprintsProcessorGrpcService voiceprintsProcessorGrpcService)
+    {
+        var result = voiceprintsProcessorGrpcService.Train(new TrainRequest());
+
+        return Ok(new { statusCode = HttpStatusCode.OK, message = result });
+    }
 }

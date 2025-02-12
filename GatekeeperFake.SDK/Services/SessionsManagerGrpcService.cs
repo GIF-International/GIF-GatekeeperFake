@@ -54,4 +54,18 @@ public class SessionsManagerGrpcService : ISessionsManagerGrpcService
             throw;
         }
     }
+
+    public UpdateSessionResponse UpdateSession(UpdateSessionRequest request)
+    {
+        try
+        {
+            var result = _client.UpdateSession(request);
+
+            return result;
+        }
+        catch (RpcException ex)
+        {
+            throw;
+        }
+    }
 }

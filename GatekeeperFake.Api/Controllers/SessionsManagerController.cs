@@ -32,4 +32,12 @@ public class SessionsManagerController : ControllerBase
 
         return Ok(new { statusCode = HttpStatusCode.OK, message = result });
     }
+
+    [HttpGet("UpdateSession")]
+    public IActionResult UpdateSession([FromServices] ISessionsManagerGrpcService sessionsManagerGrpcService)
+    {
+        var result = sessionsManagerGrpcService.UpdateSession(new UpdateSessionRequest());
+
+        return Ok(new { statusCode = HttpStatusCode.OK, message = result });
+    }
 }

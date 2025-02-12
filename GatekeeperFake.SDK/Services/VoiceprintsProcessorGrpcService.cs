@@ -40,4 +40,18 @@ public class VoiceprintsProcessorGrpcService : IVoiceprintsProcessorGrpcService
             throw;
         }
     }
+
+    public EnrollResponse Enroll(EnrollRequest request)
+    {
+        try
+        {
+            var result = _client.Enroll(request);
+
+            return result;
+        }
+        catch (RpcException ex)
+        {
+            throw;
+        }
+    }
 }

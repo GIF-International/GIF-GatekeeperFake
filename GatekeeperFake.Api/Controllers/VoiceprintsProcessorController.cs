@@ -24,4 +24,12 @@ public class VoiceprintsProcessorController : ControllerBase
 
         return Ok(new { statusCode = HttpStatusCode.OK, message = result });
     }
+
+    [HttpGet("Enroll")]
+    public IActionResult Enroll([FromServices] IVoiceprintsProcessorGrpcService voiceprintsProcessorGrpcService)
+    {
+        var result = voiceprintsProcessorGrpcService.Enroll(new EnrollRequest());
+
+        return Ok(new { statusCode = HttpStatusCode.OK, message = result });
+    }
 }

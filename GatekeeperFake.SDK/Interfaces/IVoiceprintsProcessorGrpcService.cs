@@ -6,4 +6,5 @@ public interface IVoiceprintsProcessorGrpcService
 {
     GetEnrollStatusResponse GetEnrollStatus(GetEnrollStatusRequest request);
     ProcessAudioResponse ProcessAudio(ProcessAudioRequest request);
+    EnrollResponse Enroll(EnrollRequest request);
 }

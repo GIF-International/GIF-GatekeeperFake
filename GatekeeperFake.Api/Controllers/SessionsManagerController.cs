@@ -40,4 +40,12 @@ public class SessionsManagerController : ControllerBase
 
         return Ok(new { statusCode = HttpStatusCode.OK, message = result });
     }
+
+    [HttpGet("GetSessionDecision")]
+    public IActionResult GetSessionDecision([FromServices] ISessionsManagerGrpcService sessionsManagerGrpcService)
+    {
+        var result = sessionsManagerGrpcService.GetSessionDecision(new GetSessionDecisionRequest());
+
+        return Ok(new { statusCode = HttpStatusCode.OK, message = result });
+    }
 }

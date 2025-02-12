@@ -8,4 +8,5 @@ public interface ISessionsManagerGrpcService
     StartSessionResponse StartSession(StartSessionRequest request);
     GetSessionDetailsResponse GetSessionDetails(GetSessionDetailsRequest request);
     UpdateSessionResponse UpdateSession(UpdateSessionRequest request);
+    GetSessionDecisionResponse GetSessionDecision(GetSessionDecisionRequest request);
 }

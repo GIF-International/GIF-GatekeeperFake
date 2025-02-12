@@ -68,4 +68,18 @@ public class SessionsManagerGrpcService : ISessionsManagerGrpcService
             throw;
         }
     }
+
+    public GetSessionDecisionResponse GetSessionDecision(GetSessionDecisionRequest request)
+    {
+        try
+        {
+            var result = _client.GetSessionDecision(request);
+
+            return result;
+        }
+        catch (RpcException ex)
+        {
+            throw;
+        }
+    }
 }

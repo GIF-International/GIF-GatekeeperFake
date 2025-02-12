@@ -40,4 +40,12 @@ public class VoiceprintsProcessorController : ControllerBase
 
         return Ok(new { statusCode = HttpStatusCode.OK, message = result });
     }
+
+    [HttpGet("AnalyzeAudio")]
+    public IActionResult AnalyzeAudio([FromServices] IVoiceprintsProcessorGrpcService voiceprintsProcessorGrpcService)
+    {
+        var result = voiceprintsProcessorGrpcService.AnalyzeAudio(new AnalyzeAudioRequest());
+
+        return Ok(new { statusCode = HttpStatusCode.OK, message = result });
+    }
 }

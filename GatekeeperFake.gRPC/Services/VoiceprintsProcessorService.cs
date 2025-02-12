@@ -93,4 +93,23 @@ public class VoiceprintsProcessorService : VoiceprintsProcessorBase
 
         return task;
     }
+
+    public override global::System.Threading.Tasks.Task<global::Nuance.Biosec.V1.Voiceprint.AnalyzeAudioResponse> AnalyzeAudio(global::Nuance.Biosec.V1.Voiceprint.AnalyzeAudioRequest request, grpc::ServerCallContext context)
+    {
+        //throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+
+        var task = Task.FromResult(new AnalyzeAudioResponse
+        {
+            Result = new Nuance.Biosec.V1.Voiceprint.AnalyzeAudioResult { },
+            Status = new Nuance.Rpc.Status { StatusCode = Nuance.Rpc.StatusCode.Ok },
+        });
+
+        var minDelay = _configuration.GetValue<int>("Methods:VoiceprintsProcessor:AnalyzeAudio:Delay:Min");
+        var maxDelay = _configuration.GetValue<int>("Methods:VoiceprintsProcessor:AnalyzeAudio:Delay:Max");
+        var randomDelay = new Random().Next(minDelay, maxDelay);
+
+        Thread.Sleep(randomDelay);
+
+        return task;
+    }
 }

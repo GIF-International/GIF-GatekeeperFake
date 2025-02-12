@@ -8,4 +8,5 @@ public interface IVoiceprintsProcessorGrpcService
     ProcessAudioResponse ProcessAudio(ProcessAudioRequest request);
     EnrollResponse Enroll(EnrollRequest request);
     TrainResponse Train(TrainRequest request);
+    AnalyzeAudioResponse AnalyzeAudio(AnalyzeAudioRequest request);
 }

@@ -68,4 +68,18 @@ public class VoiceprintsProcessorGrpcService : IVoiceprintsProcessorGrpcService
             throw;
         }
     }
+
+    public AnalyzeAudioResponse AnalyzeAudio(AnalyzeAudioRequest request)
+    {
+        try
+        {
+            var result = _client.AnalyzeAudio(request);
+
+            return result;
+        }
+        catch (RpcException ex)
+        {
+            throw;
+        }
+    }
 }

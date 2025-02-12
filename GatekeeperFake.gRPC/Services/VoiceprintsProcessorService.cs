@@ -28,8 +28,27 @@ public class VoiceprintsProcessorService : VoiceprintsProcessorBase
             Status = new Nuance.Rpc.Status { StatusCode = Nuance.Rpc.StatusCode.Ok },
         });
 
-        var minDelay = _configuration.GetValue<int>("Methods:VoiceprintsProcessor:GetGkVoiceprintProfileId:Delay:Min");
-        var maxDelay = _configuration.GetValue<int>("Methods:VoiceprintsProcessor:GetGkVoiceprintProfileId:Delay:Max");
+        var minDelay = _configuration.GetValue<int>("Methods:VoiceprintsProcessor:GetEnrollStatus:Delay:Min");
+        var maxDelay = _configuration.GetValue<int>("Methods:VoiceprintsProcessor:GetEnrollStatus:Delay:Max");
+        var randomDelay = new Random().Next(minDelay, maxDelay);
+
+        Thread.Sleep(randomDelay);
+
+        return task;
+    }
+
+    public override global::System.Threading.Tasks.Task<global::Nuance.Biosec.V1.Voiceprint.ProcessAudioResponse> ProcessAudio(global::Nuance.Biosec.V1.Voiceprint.ProcessAudioRequest request, grpc::ServerCallContext context)
+    {
+        //throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+
+        var task = Task.FromResult(new ProcessAudioResponse
+        {
+            Result = new Nuance.Biosec.V1.Voiceprint.AudioProcessingResult { Validity = Nuance.Biosec.V1.AudioValidity.ReasonAudioOk },
+            Status = new Nuance.Rpc.Status { StatusCode = Nuance.Rpc.StatusCode.Ok },
+        });
+
+        var minDelay = _configuration.GetValue<int>("Methods:VoiceprintsProcessor:ProcessAudio:Delay:Min");
+        var maxDelay = _configuration.GetValue<int>("Methods:VoiceprintsProcessor:ProcessAudio:Delay:Max");
         var randomDelay = new Random().Next(minDelay, maxDelay);
 
         Thread.Sleep(randomDelay);

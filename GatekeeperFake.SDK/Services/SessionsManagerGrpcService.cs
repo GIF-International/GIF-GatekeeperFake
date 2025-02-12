@@ -96,4 +96,18 @@ public class SessionsManagerGrpcService : ISessionsManagerGrpcService
             throw;
         }
     }
+
+    public StopEngagementResponse StopEngagement(StopEngagementRequest request)
+    {
+        try
+        {
+            var result = _client.StopEngagement(request);
+
+            return result;
+        }
+        catch (RpcException ex)
+        {
+            throw;
+        }
+    }
 }

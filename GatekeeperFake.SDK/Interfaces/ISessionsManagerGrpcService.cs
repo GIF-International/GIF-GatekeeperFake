@@ -10,4 +10,5 @@ public interface ISessionsManagerGrpcService
     UpdateSessionResponse UpdateSession(UpdateSessionRequest request);
     GetSessionDecisionResponse GetSessionDecision(GetSessionDecisionRequest request);
     StopSessionResponse StopSession(StopSessionRequest request);
+    StopEngagementResponse StopEngagement(StopEngagementRequest request);
 }

@@ -56,4 +56,12 @@ public class SessionsManagerController : ControllerBase
 
         return Ok(new { statusCode = HttpStatusCode.OK, message = result });
     }
+
+    [HttpGet("StopEngagement")]
+    public IActionResult StopEngagement([FromServices] ISessionsManagerGrpcService sessionsManagerGrpcService)
+    {
+        var result = sessionsManagerGrpcService.StopEngagement(new StopEngagementRequest());
+
+        return Ok(new { statusCode = HttpStatusCode.OK, message = result });
+    }
 }

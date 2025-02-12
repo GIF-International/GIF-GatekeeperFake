@@ -26,4 +26,18 @@ public class VoiceprintsManagerGrpcService : IVoiceprintsManagerGrpcService
             throw;
         }
     }
+
+    public ListEnrollmentSegmentsResponse ListEnrollmentSegments(ListEnrollmentSegmentsRequest request)
+    {
+        try
+        {
+            var result = _client.ListEnrollmentSegments(request);
+
+            return result;
+        }
+        catch (RpcException ex)
+        {
+            throw;
+        }
+    }
 }

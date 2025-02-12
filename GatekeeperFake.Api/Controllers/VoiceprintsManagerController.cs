@@ -16,4 +16,12 @@ public class VoiceprintsManagerController : ControllerBase
 
         return Ok(new { statusCode = HttpStatusCode.OK, message = result });
     }
+
+    [HttpGet("ListEnrollmentSegments")]
+    public IActionResult ListEnrollmentSegments([FromServices] IVoiceprintsManagerGrpcService voiceprintsManagerGrpcService)
+    {
+        var result = voiceprintsManagerGrpcService.ListEnrollmentSegments(new ListEnrollmentSegmentsRequest());
+
+        return Ok(new { statusCode = HttpStatusCode.OK, message = result });
+    }
 }

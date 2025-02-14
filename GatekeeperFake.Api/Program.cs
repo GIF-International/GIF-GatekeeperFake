@@ -6,7 +6,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
 
-builder.Services.AddGatekeeperFakeSDK();
+builder.Services.AddGatekeeperFakeSDK(builder.Configuration);
 
 builder.Services.AddSwaggerGen();
 

@@ -33,6 +33,9 @@ public class SessionsManagerService : SessionsManagerBase
 
         Thread.Sleep(randomDelay);
 
+        var methodName = $"{nameof(SessionsManagerService)}.{nameof(StartEngagement)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
+
         return task;
     }
 
@@ -53,6 +56,9 @@ public class SessionsManagerService : SessionsManagerBase
 
         Thread.Sleep(randomDelay);
 
+        var methodName = $"{nameof(SessionsManagerService)}.{nameof(StartSession)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
+
         return task;
     }
 
@@ -72,6 +78,9 @@ public class SessionsManagerService : SessionsManagerBase
 
         Thread.Sleep(randomDelay);
 
+        var methodName = $"{nameof(SessionsManagerService)}.{nameof(GetSessionDetails)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
+
         return task;
     }
 
@@ -89,6 +98,9 @@ public class SessionsManagerService : SessionsManagerBase
         var randomDelay = new Random().Next(minDelay, maxDelay);
 
         Thread.Sleep(randomDelay);
+
+        var methodName = $"{nameof(SessionsManagerService)}.{nameof(UpdateSession)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
 
         return task;
     }
@@ -108,6 +120,9 @@ public class SessionsManagerService : SessionsManagerBase
 
         Thread.Sleep(randomDelay);
 
+        var methodName = $"{nameof(SessionsManagerService)}.{nameof(GetSessionDecision)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
+
         return task;
     }
 
@@ -126,6 +141,9 @@ public class SessionsManagerService : SessionsManagerBase
 
         Thread.Sleep(randomDelay);
 
+        var methodName = $"{nameof(SessionsManagerService)}.{nameof(StopSession)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
+
         return task;
     }
 
@@ -143,6 +161,9 @@ public class SessionsManagerService : SessionsManagerBase
         var randomDelay = new Random().Next(minDelay, maxDelay);
 
         Thread.Sleep(randomDelay);
+
+        var methodName = $"{nameof(SessionsManagerService)}.{nameof(StopEngagement)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
 
         return task;
     }

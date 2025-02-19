@@ -34,6 +34,9 @@ public class VoiceprintsProcessorService : VoiceprintsProcessorBase
 
         Thread.Sleep(randomDelay);
 
+        var methodName = $"{nameof(VoiceprintsProcessorService)}.{nameof(GetEnrollStatus)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
+
         return task;
     }
 
@@ -52,6 +55,9 @@ public class VoiceprintsProcessorService : VoiceprintsProcessorBase
         var randomDelay = new Random().Next(minDelay, maxDelay);
 
         Thread.Sleep(randomDelay);
+
+        var methodName = $"{nameof(VoiceprintsProcessorService)}.{nameof(ProcessAudio)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
 
         return task;
     }
@@ -72,6 +78,9 @@ public class VoiceprintsProcessorService : VoiceprintsProcessorBase
 
         Thread.Sleep(randomDelay);
 
+        var methodName = $"{nameof(VoiceprintsProcessorService)}.{nameof(Enroll)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
+
         return task;
     }
 
@@ -91,6 +100,9 @@ public class VoiceprintsProcessorService : VoiceprintsProcessorBase
 
         Thread.Sleep(randomDelay);
 
+        var methodName = $"{nameof(VoiceprintsProcessorService)}.{nameof(Train)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
+
         return task;
     }
 
@@ -109,6 +121,9 @@ public class VoiceprintsProcessorService : VoiceprintsProcessorBase
         var randomDelay = new Random().Next(minDelay, maxDelay);
 
         Thread.Sleep(randomDelay);
+
+        var methodName = $"{nameof(VoiceprintsProcessorService)}.{nameof(AnalyzeAudio)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
 
         return task;
     }

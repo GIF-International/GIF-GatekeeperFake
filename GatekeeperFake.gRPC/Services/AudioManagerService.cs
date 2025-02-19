@@ -34,6 +34,9 @@ public class AudioManagerService : AudioManagerBase
 
         Thread.Sleep(randomDelay);
 
+        var methodName = $"{nameof(AudioManagerService)}.{nameof(GetUploadUrl)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
+
         return task;
     }
 }

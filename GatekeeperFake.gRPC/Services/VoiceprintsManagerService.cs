@@ -33,6 +33,9 @@ public class VoiceprintsManagerService : VoiceprintsManagerBase
 
         Thread.Sleep(randomDelay);
 
+        var methodName = $"{nameof(VoiceprintsManagerService)}.{nameof(GetGkVoiceprintProfileId)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
+
         return task;
     }
 
@@ -50,6 +53,9 @@ public class VoiceprintsManagerService : VoiceprintsManagerBase
         var randomDelay = new Random().Next(minDelay, maxDelay);
 
         Thread.Sleep(randomDelay);
+
+        var methodName = $"{nameof(VoiceprintsManagerService)}.{nameof(ListEnrollmentSegments)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
 
         return task;
     }

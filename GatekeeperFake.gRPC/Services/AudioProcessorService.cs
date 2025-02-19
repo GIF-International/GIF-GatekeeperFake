@@ -33,6 +33,9 @@ public class AudioProcessorService : AudioProcessorBase
 
         Thread.Sleep(randomDelay);
 
+        var methodName = $"{nameof(AudioProcessorService)}.{nameof(ValidateText)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
+
         return task;
     }
 
@@ -55,6 +58,9 @@ public class AudioProcessorService : AudioProcessorBase
         var randomDelay = new Random().Next(minDelay, maxDelay);
 
         Thread.Sleep(randomDelay);
+
+        var methodName = $"{nameof(AudioProcessorService)}.{nameof(DetectAudioSpoofing)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
 
         return task;
     }

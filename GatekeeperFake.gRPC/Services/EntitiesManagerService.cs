@@ -33,6 +33,9 @@ public class EntitiesManagerService : EntitiesManagerBase
 
         Thread.Sleep(randomDelay);
 
+        var methodName = $"{nameof(EntitiesManagerService)}.{nameof(GetGkPersonId)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
+
         return task;
     }
 
@@ -50,6 +53,9 @@ public class EntitiesManagerService : EntitiesManagerBase
         var randomDelay = new Random().Next(minDelay, maxDelay);
 
         Thread.Sleep(randomDelay);
+
+        var methodName = $"{nameof(EntitiesManagerService)}.{nameof(DeletePerson)}";
+        _logger.LogInformation($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} - {methodName} - Delay: {randomDelay}ms ({minDelay}-{maxDelay})");
 
         return task;
     }

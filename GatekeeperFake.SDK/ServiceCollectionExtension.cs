@@ -1,6 +1,7 @@
 ﻿using GatekeeperFake.gRPC;
 using GatekeeperFake.SDK.Interfaces;
 using GatekeeperFake.SDK.Services;
+using Grpc.Net.Client.Web;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nuance.Biosec.V1.Audio;
@@ -22,36 +23,64 @@ public static class ServiceCollectionExtension
         services.AddGrpcClient<Greeter.GreeterClient>(client =>
         {
             client.Address = new Uri(grpcUrl);
+            client.ChannelOptionsActions.Add(options =>
+            {
+                options.HttpHandler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
+            });
         });
 
         services.AddGrpcClient<SessionsManager.SessionsManagerClient>(client =>
         {
             client.Address = new Uri(grpcUrl);
+            client.ChannelOptionsActions.Add(options =>
+            {
+                options.HttpHandler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
+            });
         });
 
         services.AddGrpcClient<EntitiesManager.EntitiesManagerClient>(client =>
         {
             client.Address = new Uri(grpcUrl);
+            client.ChannelOptionsActions.Add(options =>
+            {
+                options.HttpHandler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
+            });
         });
 
         services.AddGrpcClient<VoiceprintsManager.VoiceprintsManagerClient>(client =>
         {
             client.Address = new Uri(grpcUrl);
+            client.ChannelOptionsActions.Add(options =>
+            {
+                options.HttpHandler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
+            });
         });
 
         services.AddGrpcClient<VoiceprintsProcessor.VoiceprintsProcessorClient>(client =>
         {
             client.Address = new Uri(grpcUrl);
+            client.ChannelOptionsActions.Add(options =>
+            {
+                options.HttpHandler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
+            });
         });
 
         services.AddGrpcClient<AudioManager.AudioManagerClient>(client =>
         {
             client.Address = new Uri(grpcUrl);
+            client.ChannelOptionsActions.Add(options =>
+            {
+                options.HttpHandler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
+            });
         });
 
         services.AddGrpcClient<AudioProcessor.AudioProcessorClient>(client =>
         {
             client.Address = new Uri(grpcUrl);
+            client.ChannelOptionsActions.Add(options =>
+            {
+                options.HttpHandler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
+            });
         });
 
         services.AddScoped<IGreeterGrpcService, GreeterGrpcService>();

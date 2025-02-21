@@ -1,0 +1,37 @@
+# version: '3.8'
+
+services:
+  gatekeeper-fake:
+    container_name: gatekeeper-fake
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        configuration: Release
+    ports:
+      - "5000:5000"
+      #- "5001:5001"
+    volumes:
+      - ./GatekeeperFake.gRPC/appsettings.json:/app/appsettings.json
+      #- ./certificado.pfx:/app/certificado.pfx
+      #- ./GatekeeperFake.gRPC/Certificate/localhost.pfx:/app/localhost.pfx
+    #environment:
+    #  - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certificado.pfx
+    #  - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/localhost.pfx
+    #  - ASPNETCORE_Kestrel__Certificates__Default__Password=Q!w2e3r4t5
+    networks:
+      - gatekeeper-fake-network
+  #nginx:
+  #  image: nginx:latest
+  #  volumes:
+  #    - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  #    - ./certs/cert.pem:/etc/nginx/certs/cert.pem
+  #    - ./certs/key.pem:/etc/nginx/certs/key.pem
+  #  ports:
+  #    - "443:443"
+  #  networks:
+  #    - gatekeeper-fake-network
+
+networks:
+  gatekeeper-fake-network:
+    driver: bridge
